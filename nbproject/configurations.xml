@@ -11,6 +11,7 @@
         <itemPath>common/filter.h</itemPath>
       </logicalFolder>
       <itemPath>settings.h</itemPath>
+      <itemPath>timestamp.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -68,6 +69,11 @@
           </incDir>
           <commandLine>-ccbin g++ -m64 -gencode arch=compute_11,code=sm_11</commandLine>
         </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="common/2d_cuda_malloc.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -92,6 +98,8 @@
       <item path="main_cuda.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="settings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="timestamp.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -127,6 +135,11 @@
         <asmTool>
           <developmentMode>5</developmentMode>
         </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
       <item path="common/2d_cuda_malloc.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -151,6 +164,8 @@
       <item path="main_cuda.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="settings.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="timestamp.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

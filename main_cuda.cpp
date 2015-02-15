@@ -10,9 +10,9 @@
 
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
-#include <unistd.h>
-#include <sys/times.h>
+#include "timestamp.h"
 
 #include "settings.h"
 #include "common/2d_malloc.h"
@@ -24,32 +24,25 @@
 #include <cuda_runtime.h>
 #include <cuda_runtime_api.h>
 
-extern "C" void zero_pixels(float (**curr_image_d)[CHANNELS]);
-extern "C" void fill_borders(float (**curr_image_d)[CHANNELS], unsigned int height, unsigned int width);
-extern "C" void apply_inner_filter_cuda(float (**output_image)[CHANNELS], float (**input_image)[CHANNELS], unsigned int height, unsigned int width, float (**filter_d)[1]);
-extern "C" void apply_outer_filter_cuda(float (**output_image)[CHANNELS], float (**input_image)[CHANNELS], unsigned int height, unsigned int width, float (**filter_d)[1]);
 extern "C" bool init_filter(float (***filter_d)[1], const float filter[2 * B + 1][2 * B + 1]);
+extern "C" void fill_borders(float (**curr_image_d)[CHANNELS], unsigned int height, unsigned int width);
+extern "C" void apply_filter_cuda(float (**output_image)[CHANNELS], float (**input_image)[CHANNELS], float (**filter_d)[1], unsigned int block_size, unsigned int grid_dim);
 
 /*
  * 
  */
 int main_cuda(int argc, char** argv)
 {
-    //    if (argc != 3)
-    //    {
-    //        printf("Usage: %s <iterations> <convergence>\n", argv[0]);
-    //        return (EXIT_FAILURE);
-    //    }
-    //
-    //    int iterations = atoi(argv[1]);
-    //    int convergence = atoi(argv[2]);
+    if (argc != 2)
+    {
+        printf("Usage: %s <iterations>\n", argv[0]);
+        return (EXIT_FAILURE);
+    }
 
-    int iterations = 1;
-    int convergence = 0;
+    int iterations = atoi(argv[1]);
 
     printf("main_cuda()\n");
-    printf("Iterations: %d, Convergence: %d\n", iterations, convergence);
-    printf("Threads: %d\n", 1);
+    printf("Iterations: %d\n", iterations);
 
     bool ok = true;
 
@@ -93,32 +86,44 @@ int main_cuda(int argc, char** argv)
     if (ok)
         ok = alloc_float_array_cuda((float ***) &curr_image_d, &curr_image_p, B + HEIGHT + B, B + WIDTH + B, CHANNELS);
 
-    /* Copy image data to device. */
-
-    cudaMemcpy(curr_image_p, &(image_h[0][0][0]), (B + HEIGHT + B) * (B + WIDTH + B) * CHANNELS * sizeof (float), cudaMemcpyHostToDevice);
-
-    /* Clear host image data. */
-
-    memset(&(image_h[0][0][0]), 0, (B + HEIGHT + B) * (B + WIDTH + B) * CHANNELS * sizeof (float));
-
-    /* Start timing. */
-
-    double t1, t2, real_time;
-    struct tms tb1, tb2;
-    double tickspersec = (double) sysconf(_SC_CLK_TCK);
-
-    t1 = (double) times(&tb1);
-
-    /* Test: Zero out all pixels. */
-
-    // zero_pixels(curr_image_d);
-
     /* Initialize filter in device memory space. */
 
     float (**filter_d)[1];
 
     if (ok)
         ok = init_filter(&filter_d, filter);
+
+    /* Device parameters for nVidia 9600GT (G94), passed to main filter function. */
+
+    /* nVidia G94 supports 8 resident blocks per SMP, 768 resident threads per SMP. */
+
+    unsigned int block_size = 256; // 512 threads per block maximum for nVidia G94
+
+    /* nVidia G94 supports 2-dimensional grids with a maximum of 65535 for x,y dimension. */
+
+    unsigned int threads_required = HEIGHT * WIDTH;
+    unsigned int grid_dim = threads_required / block_size;
+    double sqr = sqrt(grid_dim);
+    grid_dim = sqr;
+    grid_dim++;
+    printf("Grid dim: %u\n", grid_dim);
+
+    /* Start timing. */
+
+    float memcopy, compute;
+    timestamp t_start;
+    t_start = getTimestamp();
+
+    /* Copy image data to device. */
+
+    cudaMemcpy(curr_image_p, &(image_h[0][0][0]), (B + HEIGHT + B) * (B + WIDTH + B) * CHANNELS * sizeof (float), cudaMemcpyHostToDevice);
+
+    memcopy = getElapsedtime(t_start);
+    t_start = getTimestamp();
+
+    /* Clear host image data. */
+
+    // memset(&(image_h[0][0][0]), 0, (B + HEIGHT + B) * (B + WIDTH + B) * CHANNELS * sizeof (float));
 
     /* Apply filter. */
 
@@ -134,9 +139,7 @@ int main_cuda(int argc, char** argv)
 
             /* Apply filter. */
 
-            apply_inner_filter_cuda(prev_image_d, curr_image_d, B + HEIGHT + B, B + WIDTH + B, filter_d);
-
-            apply_outer_filter_cuda(prev_image_d, curr_image_d, B + HEIGHT + B, B + WIDTH + B, filter_d);
+            apply_filter_cuda(prev_image_d, curr_image_d, filter_d, block_size, grid_dim);
 
             /* Switch current / previous image buffers. */
 
@@ -149,30 +152,24 @@ int main_cuda(int argc, char** argv)
             tmp = prev_image_p;
             prev_image_p = curr_image_p;
             curr_image_p = tmp;
-
-            /* Check for convergence. */
-
-            //            if (convergence > 0 && n % convergence == 0)
-            //            {
-            //                if (images_identical(curr_image, prev_image, B + HEIGHT + B, B + WIDTH + B))
-            //                {
-            //                    printf("Filter has converged after %d iterations.\n", n);
-            //                    break;
-            //                }
-            //            }
         }
     }
 
     /* Stop time measurement, print time. */
 
-    t2 = (double) times(&tb2);
+    cudaThreadSynchronize();
 
-    real_time = (double) (t2 - t1) / tickspersec;
-    printf("Completed in %.3f sec\n", real_time);
+    compute = getElapsedtime(t_start);
+    t_start = getTimestamp();
 
     /* Copy processed image data from device. */
 
     cudaMemcpy(&(image_h[0][0][0]), curr_image_p, (B + HEIGHT + B) * (B + WIDTH + B) * CHANNELS * sizeof (float), cudaMemcpyDeviceToHost);
+
+    memcopy += getElapsedtime(t_start);
+
+    printf("Completed in %.3f sec\n", compute / 1000);
+    printf("Memory copy in %.3f sec\n", memcopy / 1000);
 
     //    /* Wide buffer including borders. */
     //
