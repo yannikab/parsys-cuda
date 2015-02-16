@@ -1,8 +1,8 @@
 /* 
- * File:   main_serial.c
- * Author: John
+ * File:   main_cuda.c
+ * Author: jester
  *
- * Created on January 21, 2015, 11:22 AM
+ * Created on February 13, 2015, 10:22 PM
  */
 
 #include <stdio.h>
@@ -27,7 +27,7 @@
 /*
  * 
  */
-int main_cuda(int argc, char** argv)
+int main(int argc, char** argv)
 {
     if (argc != 2)
     {

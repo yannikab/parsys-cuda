@@ -1,5 +1,5 @@
 /* 
- * File:   2d_cuda_malloc.c
+ * File:   2d_malloc_cuda.c
  * Author: John
  *
  * Created on February 13, 2015, 10:19 PM

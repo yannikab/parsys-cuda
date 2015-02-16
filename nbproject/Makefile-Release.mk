@@ -39,7 +39,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/common/2d_malloc_cuda.o \
 	${OBJECTDIR}/common/file_io.o \
 	${OBJECTDIR}/common/filter_cuda.o \
-	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/main_cuda.o
 
 
@@ -82,10 +81,6 @@ ${OBJECTDIR}/common/file_io.o: common/file_io.cpp
 ${OBJECTDIR}/common/filter_cuda.o: common/filter_cuda.cu 
 	${MKDIR} -p ${OBJECTDIR}/common
 	$(COMPILE.cc) -O2 -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/common/filter_cuda.o common/filter_cuda.cu
-
-${OBJECTDIR}/main.o: main.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	$(COMPILE.cc) -O2 -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/main_cuda.o: main_cuda.cpp 
 	${MKDIR} -p ${OBJECTDIR}

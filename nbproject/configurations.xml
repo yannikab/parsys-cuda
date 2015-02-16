@@ -26,7 +26,6 @@
         <itemPath>common/file_io.cpp</itemPath>
         <itemPath>common/filter_cuda.cu</itemPath>
       </logicalFolder>
-      <itemPath>main.cpp</itemPath>
       <itemPath>main_cuda.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -90,8 +89,6 @@
       </item>
       <item path="common/filter_cuda.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="main_cuda.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="settings.h" ex="false" tool="3" flavor2="0">
@@ -153,8 +150,6 @@
       <item path="common/filter_cuda.cu" ex="false" tool="1" flavor2="0">
       </item>
       <item path="common/filter_cuda.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="main_cuda.cpp" ex="false" tool="1" flavor2="0">
       </item>
