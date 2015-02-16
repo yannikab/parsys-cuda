@@ -1,4 +1,4 @@
-#include "filter.h"
+#include "filter_cuda.h"
 
 #include "../settings.h"
 
@@ -8,15 +8,36 @@
 #include <cuda_runtime_api.h>
 #include <cuda.h>
 
+extern "C" bool init_filter(float (***filter_d)[1], float **p_d, const float filter[2 * B + 1][2 * B + 1])
+{
+    float *p;
+    float (**filter_p)[1];
+
+    if (!alloc_float_array_cuda((float ***) &filter_p, &p, 2 * B + 1, 2 * B + 1, 1))
+        return false;
+
+    cudaMemcpy(p, filter, (2 * B + 1) * (2 * B + 1) * sizeof (float), cudaMemcpyHostToDevice);
+
+    *filter_d = filter_p;
+    *p_d = p;
+
+    return true;
+}
+
+extern "C" void destroy_filter(float (***filter_d)[1], float **p_d)
+{
+    dealloc_float_array_cuda((float ***) filter_d, p_d);
+}
+
 __global__ void k_fill_borders(float (**curr_image_d)[CHANNELS], unsigned int height, unsigned int width)
 {
     unsigned int threadId = threadIdx.y * blockDim.x + threadIdx.x;
-    
+
     if (threadId > 7)
         return;
 
     unsigned int i, j, c;
-    
+
     /* Fill borders with outer image data. */
 
     // south
@@ -81,13 +102,13 @@ __global__ void k_apply_filter_cuda(float (**output_image_d)[CHANNELS], float (*
     unsigned int threadsPerBlock = blockDim.x * blockDim.y;
     unsigned int blockId = blockIdx.y * gridDim.x + blockIdx.x;
     unsigned int threadId = threadIdx.y * blockDim.x + threadIdx.x;
-    unsigned int globalIdx = blockId * threadsPerBlock + threadId;
+    unsigned int globalId = blockId * threadsPerBlock + threadId;
 
     unsigned int i, j, c;
     int p, q;
 
-    i = globalIdx / WIDTH;
-    j = globalIdx % WIDTH;
+    i = globalId / WIDTH;
+    j = globalId % WIDTH;
 
     if (i > HEIGHT - 1)
         return;
@@ -111,6 +132,7 @@ extern "C" void fill_borders(float (**curr_image_d)[CHANNELS], unsigned int heig
 {
     dim3 dimBl(8);
     dim3 dimGr(1);
+    
     k_fill_borders<<<dimGr, dimBl>>>(curr_image_d, height, width);
 }
 
@@ -120,19 +142,4 @@ extern "C" void apply_filter_cuda(float (**output_image)[CHANNELS], float (**inp
     dim3 dimGr(grid_dim, grid_dim);
 
     k_apply_filter_cuda<<<dimGr, dimBl>>>(output_image, input_image, filter_d);
-}
-
-extern "C" bool init_filter(float (***filter_d)[1], const float filter[2 * B + 1][2 * B + 1])
-{
-    float *p;
-    float (**filter_p)[1];
-
-    if (!alloc_float_array_cuda((float ***) &filter_p, &p, 2 * B + 1, 2 * B + 1, 1))
-        return false;
-
-    cudaMemcpy(p, filter, (2 * B + 1) * (2 * B + 1) * sizeof (float), cudaMemcpyHostToDevice);
-
-    *filter_d = filter_p;
-
-    return true;
 }

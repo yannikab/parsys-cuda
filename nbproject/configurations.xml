@@ -8,7 +8,7 @@
         <itemPath>common/2d_cuda_malloc.h</itemPath>
         <itemPath>common/2d_malloc.h</itemPath>
         <itemPath>common/file_io.h</itemPath>
-        <itemPath>common/filter.h</itemPath>
+        <itemPath>common/filter_cuda.h</itemPath>
       </logicalFolder>
       <itemPath>settings.h</itemPath>
       <itemPath>timestamp.h</itemPath>
@@ -24,7 +24,6 @@
         <itemPath>common/2d_malloc.cpp</itemPath>
         <itemPath>common/2d_malloc_cuda.cu</itemPath>
         <itemPath>common/file_io.cpp</itemPath>
-        <itemPath>common/filter.cpp</itemPath>
         <itemPath>common/filter_cuda.cu</itemPath>
       </logicalFolder>
       <itemPath>main.cpp</itemPath>
@@ -87,11 +86,9 @@
       </item>
       <item path="common/file_io.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/filter.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="common/filter.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="common/filter_cuda.cu" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="common/filter_cuda.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -153,11 +150,9 @@
       </item>
       <item path="common/file_io.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/filter.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="common/filter.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="common/filter_cuda.cu" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="common/filter_cuda.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

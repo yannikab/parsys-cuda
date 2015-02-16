@@ -12,9 +12,9 @@
 
 extern "C" {
     bool alloc_uchar_array_cuda(unsigned char ***array_d, unsigned char **p_d, int rows, int columns, int channels);
-    void dealloc_uchar_array_cuda(unsigned char ***array);
     bool alloc_float_array_cuda(float ***array_d, float **p_d, int rows, int columns, int channels);
-    void dealloc_float_array_cuda(float ***array);
+    void dealloc_uchar_array_cuda(unsigned char ***array_d, unsigned char **p_d);
+    void dealloc_float_array_cuda(float ***array_d, float **p_d);
 }
 
 #endif	/* TWOD_CUDA_MALLOC_H */

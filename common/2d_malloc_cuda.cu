@@ -15,19 +15,22 @@
 #include <cuda_runtime_api.h>
 #include <cuda.h>
 
-__global__ void k_assign_uchar_ptrs(unsigned char **array, unsigned char *p, int rows, int columns, int channels) {
+__global__ void k_assign_uchar_ptrs(unsigned char **array, unsigned char *p, int rows, int columns, int channels)
+{
     int i;
     for (i = 0; i < rows; i++)
         array[i] = &(p[i * columns * channels]);
 }
 
-__global__ void k_assign_float_ptrs(float **array, float *p, int rows, int columns, int channels) {
+__global__ void k_assign_float_ptrs(float **array, float *p, int rows, int columns, int channels)
+{
     int i;
     for (i = 0; i < rows; i++)
         array[i] = &(p[i * columns * channels]);
 }
 
-extern "C" bool alloc_uchar_array_cuda(unsigned char ***array_d, unsigned char **p_d, int rows, int columns, int channels) {
+extern "C" bool alloc_uchar_array_cuda(unsigned char ***array_d, unsigned char **p_d, int rows, int columns, int channels)
+{
     unsigned char *p;
     cudaMalloc((void **) &p, rows * columns * channels * sizeof (unsigned char));
     if (p == NULL)
@@ -56,13 +59,8 @@ extern "C" bool alloc_uchar_array_cuda(unsigned char ***array_d, unsigned char *
     return true;
 }
 
-extern "C" void dealloc_uchar_array_cuda(unsigned char ***array) {
-    cudaFree(&((*array)[0][0]));
-    cudaFree(*array);
-    *array = NULL;
-}
-
-extern "C" bool alloc_float_array_cuda(float ***array_d, float **p_d, int rows, int columns, int channels) {
+extern "C" bool alloc_float_array_cuda(float ***array_d, float **p_d, int rows, int columns, int channels)
+{
     float *p;
     cudaMalloc((void **) &p, rows * columns * channels * sizeof (float));
     if (p == NULL)
@@ -91,8 +89,18 @@ extern "C" bool alloc_float_array_cuda(float ***array_d, float **p_d, int rows, 
     return true;
 }
 
-extern "C" void dealloc_float_array_cuda(float ***array) {
-    cudaFree(&((*array)[0][0]));
-    cudaFree(*array);
-    *array = NULL;
+extern "C" void dealloc_uchar_array_cuda(unsigned char ***array_d, unsigned char **p_d)
+{
+    cudaFree(p_d);
+    p_d = NULL;
+    cudaFree(*array_d);
+    *array_d = NULL;
+}
+
+extern "C" void dealloc_float_array_cuda(float ***array_d, float **p_d)
+{
+    cudaFree(p_d);
+    p_d = NULL;
+    cudaFree(*array_d);
+    *array_d = NULL;
 }
