@@ -8,7 +8,7 @@
 #ifndef FILE_IO_H
 #define	FILE_IO_H
 
-#include "../settings.h"
+#include "settings.h"
 
 typedef enum {
     INPUT,

@@ -5,10 +5,10 @@
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="common" projectFiles="true">
-        <itemPath>common/2d_cuda_malloc.h</itemPath>
-        <itemPath>common/2d_malloc.h</itemPath>
-        <itemPath>common/file_io.h</itemPath>
-        <itemPath>common/filter_cuda.h</itemPath>
+        <itemPath>2d_cuda_malloc.h</itemPath>
+        <itemPath>2d_malloc.h</itemPath>
+        <itemPath>file_io.h</itemPath>
+        <itemPath>filter_cuda.h</itemPath>
       </logicalFolder>
       <itemPath>settings.h</itemPath>
       <itemPath>timestamp.h</itemPath>
@@ -21,10 +21,10 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="common" projectFiles="true">
-        <itemPath>common/2d_malloc.cpp</itemPath>
-        <itemPath>common/2d_malloc_cuda.cu</itemPath>
-        <itemPath>common/file_io.cpp</itemPath>
-        <itemPath>common/filter_cuda.cu</itemPath>
+        <itemPath>2d_malloc.cpp</itemPath>
+        <itemPath>2d_malloc_cuda.cu</itemPath>
+        <itemPath>file_io.cpp</itemPath>
+        <itemPath>filter_cuda.cu</itemPath>
       </logicalFolder>
       <itemPath>main_cuda.cpp</itemPath>
     </logicalFolder>
@@ -73,21 +73,21 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="common/2d_cuda_malloc.h" ex="false" tool="3" flavor2="0">
+      <item path="2d_cuda_malloc.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/2d_malloc.cpp" ex="false" tool="1" flavor2="0">
+      <item path="2d_malloc.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/2d_malloc.h" ex="false" tool="3" flavor2="0">
+      <item path="2d_malloc.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/2d_malloc_cuda.cu" ex="false" tool="1" flavor2="0">
+      <item path="2d_malloc_cuda.cu" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/file_io.cpp" ex="false" tool="1" flavor2="0">
+      <item path="file_io.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/file_io.h" ex="false" tool="3" flavor2="0">
+      <item path="file_io.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/filter_cuda.cu" ex="false" tool="1" flavor2="0">
+      <item path="filter_cuda.cu" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/filter_cuda.h" ex="false" tool="3" flavor2="0">
+      <item path="filter_cuda.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main_cuda.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -135,21 +135,21 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
-      <item path="common/2d_cuda_malloc.h" ex="false" tool="3" flavor2="0">
+      <item path="2d_cuda_malloc.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/2d_malloc.cpp" ex="false" tool="1" flavor2="0">
+      <item path="2d_malloc.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/2d_malloc.h" ex="false" tool="3" flavor2="0">
+      <item path="2d_malloc.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/2d_malloc_cuda.cu" ex="false" tool="1" flavor2="0">
+      <item path="2d_malloc_cuda.cu" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/file_io.cpp" ex="false" tool="1" flavor2="0">
+      <item path="file_io.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/file_io.h" ex="false" tool="3" flavor2="0">
+      <item path="file_io.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="common/filter_cuda.cu" ex="false" tool="1" flavor2="0">
+      <item path="filter_cuda.cu" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="common/filter_cuda.h" ex="false" tool="3" flavor2="0">
+      <item path="filter_cuda.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main_cuda.cpp" ex="false" tool="1" flavor2="0">
       </item>

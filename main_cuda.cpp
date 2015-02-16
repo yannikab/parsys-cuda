@@ -15,10 +15,10 @@
 #include "timestamp.h"
 
 #include "settings.h"
-#include "common/2d_malloc.h"
-#include "common/2d_cuda_malloc.h"
-#include "common/file_io.h"
-#include "common/filter_cuda.h"
+#include "2d_malloc.h"
+#include "2d_cuda_malloc.h"
+#include "file_io.h"
+#include "filter_cuda.h"
 
 #include <cuda.h>
 #include <cuda_runtime.h>

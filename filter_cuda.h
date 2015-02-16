@@ -10,7 +10,7 @@
 
 #include <stdbool.h>
 
-#include "../settings.h"
+#include "settings.h"
 
 #define B 1
 

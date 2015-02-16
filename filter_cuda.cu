@@ -1,6 +1,6 @@
 #include "filter_cuda.h"
 
-#include "../settings.h"
+#include "settings.h"
 
 #include "2d_cuda_malloc.h"
 

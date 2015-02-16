@@ -35,10 +35,10 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/common/2d_malloc.o \
-	${OBJECTDIR}/common/2d_malloc_cuda.o \
-	${OBJECTDIR}/common/file_io.o \
-	${OBJECTDIR}/common/filter_cuda.o \
+	${OBJECTDIR}/2d_malloc.o \
+	${OBJECTDIR}/2d_malloc_cuda.o \
+	${OBJECTDIR}/file_io.o \
+	${OBJECTDIR}/filter_cuda.o \
 	${OBJECTDIR}/main_cuda.o
 
 
@@ -66,21 +66,21 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cuda_conv: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/cuda_conv ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/common/2d_malloc.o: common/2d_malloc.cpp 
-	${MKDIR} -p ${OBJECTDIR}/common
-	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/common/2d_malloc.o common/2d_malloc.cpp
+${OBJECTDIR}/2d_malloc.o: 2d_malloc.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/2d_malloc.o 2d_malloc.cpp
 
-${OBJECTDIR}/common/2d_malloc_cuda.o: common/2d_malloc_cuda.cu 
-	${MKDIR} -p ${OBJECTDIR}/common
-	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/common/2d_malloc_cuda.o common/2d_malloc_cuda.cu
+${OBJECTDIR}/2d_malloc_cuda.o: 2d_malloc_cuda.cu 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/2d_malloc_cuda.o 2d_malloc_cuda.cu
 
-${OBJECTDIR}/common/file_io.o: common/file_io.cpp 
-	${MKDIR} -p ${OBJECTDIR}/common
-	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/common/file_io.o common/file_io.cpp
+${OBJECTDIR}/file_io.o: file_io.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/file_io.o file_io.cpp
 
-${OBJECTDIR}/common/filter_cuda.o: common/filter_cuda.cu 
-	${MKDIR} -p ${OBJECTDIR}/common
-	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/common/filter_cuda.o common/filter_cuda.cu
+${OBJECTDIR}/filter_cuda.o: filter_cuda.cu 
+	${MKDIR} -p ${OBJECTDIR}
+	$(COMPILE.cc) -g -I/usr/include -I/usr/include/x86_64-linux-gnu -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/cuda/include -o ${OBJECTDIR}/filter_cuda.o filter_cuda.cu
 
 ${OBJECTDIR}/main_cuda.o: main_cuda.cpp 
 	${MKDIR} -p ${OBJECTDIR}
