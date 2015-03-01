@@ -1,6 +1,6 @@
 /* 
  * File:   file_io.c
- * Author: John
+ * Author: jester
  *
  * Created on January 21, 2015, 10:33 AM
  */
@@ -18,7 +18,8 @@
 
 #define STRSIZE 512
 
-char *create_file_name(file_type type, int channel) {
+char *create_file_name(file_type type, int channel)
+{
     char *file_name = NULL;
 
     bool ok = true;
@@ -54,7 +55,8 @@ char *create_file_name(file_type type, int channel) {
     return file_name;
 }
 
-bool read_image(unsigned char ***file_buffer) {
+bool read_image(unsigned char ***file_buffer)
+{
     bool ok = true;
 
     /* Open input file. */
@@ -106,7 +108,8 @@ bool read_image(unsigned char ***file_buffer) {
     return ok;
 }
 
-bool write_channels(unsigned char (**file_buffer)[CHANNELS], int height, int width) {
+bool write_channels(unsigned char (**file_buffer)[CHANNELS], int height, int width)
+{
     bool ok = true;
 
     /* Create one output buffer per channel. */

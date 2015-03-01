@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=cuda_conv
+PROJECTNAME=cuda
 
 # Active Configuration
 DEFAULTCONF=Debug

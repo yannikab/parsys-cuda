@@ -1,3 +1,10 @@
+/* 
+ * File:   filter_cuda.cu
+ * Author: jester
+ *
+ * Created on January 21, 2015, 10:33 AM
+ */
+
 #include "filter_cuda.h"
 
 #include "settings.h"
@@ -132,7 +139,7 @@ extern "C" void fill_borders(float (**curr_image_d)[CHANNELS], unsigned int heig
 {
     dim3 dimBl(8);
     dim3 dimGr(1);
-    
+
     k_fill_borders<<<dimGr, dimBl>>>(curr_image_d, height, width);
 }
 

@@ -1,6 +1,6 @@
 /* 
- * File:   2d_malloc.c
- * Author: John
+ * File:   2d_malloc.cpp
+ * Author: jester
  *
  * Created on 21 Ιανουάριος 2015, 10:21 πμ
  */
@@ -12,7 +12,8 @@
 
 #include "2d_malloc.h"
 
-bool alloc_uchar_array(unsigned char ***array, int rows, int columns, int channels) {
+bool alloc_uchar_array(unsigned char ***array, int rows, int columns, int channels)
+{
     unsigned char *p;
     p = (unsigned char *) malloc(rows * columns * channels * sizeof (unsigned char));
     if (p == NULL)
@@ -36,13 +37,15 @@ bool alloc_uchar_array(unsigned char ***array, int rows, int columns, int channe
     return true;
 }
 
-void dealloc_uchar_array(unsigned char ***array) {
+void dealloc_uchar_array(unsigned char ***array)
+{
     free(&((*array)[0][0]));
     free(*array);
     *array = NULL;
 }
 
-bool alloc_float_array(float ***array, int rows, int columns, int channels) {
+bool alloc_float_array(float ***array, int rows, int columns, int channels)
+{
     float *p;
     p = (float *) malloc(rows * columns * channels * sizeof (float));
     if (p == NULL)
@@ -66,7 +69,8 @@ bool alloc_float_array(float ***array, int rows, int columns, int channels) {
     return true;
 }
 
-void dealloc_float_array(float ***array) {
+void dealloc_float_array(float ***array)
+{
     free(&((*array)[0][0]));
     free(*array);
     *array = NULL;

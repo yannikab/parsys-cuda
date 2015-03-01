@@ -1,6 +1,6 @@
 /* 
- * File:   2d_malloc_cuda.c
- * Author: John
+ * File:   2d_malloc_cuda.cu
+ * Author: jester
  *
  * Created on February 13, 2015, 10:19 PM
  */
@@ -35,7 +35,7 @@ extern "C" bool alloc_uchar_array_cuda(unsigned char ***array_d, unsigned char *
     cudaMalloc((void **) &p, rows * columns * channels * sizeof (unsigned char));
     if (p == NULL)
     {
-        fprintf(stderr, "cudaMalloc: could not allocate device memory (1)\n");
+        fprintf(stderr, "cudaMalloc(): could not allocate device memory\n");
         return false;
     }
 
@@ -45,7 +45,7 @@ extern "C" bool alloc_uchar_array_cuda(unsigned char ***array_d, unsigned char *
     cudaMalloc((void **) &array_p, rows * sizeof (unsigned char *));
     if (array_p == NULL)
     {
-        fprintf(stderr, "cudaMalloc: could not allocate device memory (2)\n");
+        fprintf(stderr, "cudaMalloc(): could not allocate device memory\n");
         cudaFree(p);
         return false;
     }
@@ -65,7 +65,7 @@ extern "C" bool alloc_float_array_cuda(float ***array_d, float **p_d, int rows, 
     cudaMalloc((void **) &p, rows * columns * channels * sizeof (float));
     if (p == NULL)
     {
-        fprintf(stderr, "cudaMalloc: could not allocate device memory (1)\n");
+        fprintf(stderr, "cudaMalloc(): could not allocate device memory\n");
         return false;
     }
 
@@ -75,7 +75,7 @@ extern "C" bool alloc_float_array_cuda(float ***array_d, float **p_d, int rows, 
     cudaMalloc((void **) &array_p, rows * sizeof (float *));
     if (array_p == NULL)
     {
-        fprintf(stderr, "cudaMalloc: could not allocate device memory (2)\n");
+        fprintf(stderr, "cudaMalloc(): could not allocate device memory\n");
         cudaFree(p);
         return false;
     }

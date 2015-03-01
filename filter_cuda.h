@@ -1,6 +1,6 @@
 /* 
  * File:   filter_cuda.h
- * Author: John
+ * Author: jester
  *
  * Created on February 16, 2015, 1:55 AM
  */

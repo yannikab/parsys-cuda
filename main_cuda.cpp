@@ -122,13 +122,14 @@ int main(int argc, char** argv)
             cudaMemcpyHostToDevice));
 
     memcopy = getElapsedtime(t_start);
-    t_start = getTimestamp();
 
     /* Clear host image data. */
 
-    // memset(&(image_h[0][0][0]), 0, (B + HEIGHT + B) * (B + WIDTH + B) * CHANNELS * sizeof (float));
+    memset(&(image_h[0][0][0]), 0, (B + HEIGHT + B) * (B + WIDTH + B) * CHANNELS * sizeof (float));
 
     /* Apply filter. */
+
+    t_start = getTimestamp();
 
     unsigned int n;
 

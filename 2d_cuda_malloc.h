@@ -1,6 +1,6 @@
 /* 
  * File:   2d_cuda_malloc.h
- * Author: John
+ * Author: jester
  *
  * Created on February 13, 2015, 10:18 PM
  */

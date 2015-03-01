@@ -1,6 +1,6 @@
 /* 
  * File:   2d_malloc.h
- * Author: John
+ * Author: jester
  *
  * Created on January 21, 2015, 10:48 AM
  */

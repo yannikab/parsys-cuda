@@ -1,6 +1,6 @@
 /* 
  * File:   settings.h
- * Author: John
+ * Author: jester
  *
  * Created on January 21, 2015, 10:36 AM
  */

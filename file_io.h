@@ -1,6 +1,6 @@
 /* 
  * File:   file_io.h
- * Author: John
+ * Author: jester
  *
  * Created on January 21, 2015, 10:34 AM
  */
